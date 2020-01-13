@@ -1,10 +1,11 @@
 import sys
+import os.path
 from datetime import datetime
 from datetime import timedelta
 import plotly
 import plotly.figure_factory as ff
 
-if len(sys.argv) != 3 or ',' not in sys.argv[1] or ';' not in sys.argv[1]:
+if len(sys.argv) != 3  or ',' not in sys.argv[1] or ';' not in sys.argv[1]:
     print('Required two parameters: timelineA,action1,start,duration,color;timelineB,action2,start,duration,color... '
           'outputfile'
           '\nColors use hexadecimal format (e.g. A9C308)'
@@ -17,8 +18,14 @@ timelines = []  # Unique timelines names (ordered)
 plan = []  # Complete plan
 colors = {}  # Colors (one per action)
 
+if os.path.isfile(sys.argv[1]):
+    with open(sys.argv[1], 'r') as fc:
+        cmdline = fc.readline()
+else:
+    cmdline = sys.argv[1]
+
 # Setup actions for filling timelines
-for act in sys.argv[1].split(';'):
+for act in cmdline.split(';'):
     tmp = act.split(',')
     start = t0 + timedelta(seconds=float(tmp[2]))
     finish = start + timedelta(seconds=float(tmp[3]))
