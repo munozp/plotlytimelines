@@ -5,7 +5,7 @@ from datetime import timedelta
 import plotly
 import plotly.figure_factory as ff
 
-if len(sys.argv) != 3  or ',' not in sys.argv[1] or ';' not in sys.argv[1]:
+if len(sys.argv) != 3:
     print('Required two parameters: timelineA,action1,start,duration,color;timelineB,action2,start,duration,color... '
           'outputfile'
           '\nColors use hexadecimal format (e.g. A9C308)'
